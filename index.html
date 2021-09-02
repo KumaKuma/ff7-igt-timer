@@ -6,9 +6,10 @@
     <script src="jquery.js"></script>
 </head>
 <body>
-<h2 style="font-family: monospace" id="timer"></h2>
-<h2 style="font-family: monospace" id="timer-2"></h2>
-<h2 style="font-family: monospace" id="timer-3"></h2>
+<p>IGT timer:</p>
+<h1 style="font-family: monospace" id="timer-2"></h1>
+<p>RTA timer (as it it started from the given IGT):</p>
+<h1 style="font-family: monospace" id="timer-3"></h1>
 
 <br>
 <button id="start-button" onclick="startButton()">Start</button>
@@ -25,7 +26,7 @@
         let d = new Date();
         start_real_time_millis = d.getTime();
 
-        let timer_element = $("#timer").get()[0];
+        // let timer_element = $("#timer").get()[0];
         let timer2_element = $("#timer-2").get()[0];
         let timer3_element = $("#timer-3").get()[0];
         if (ivar !== undefined && ivar !== null) {
@@ -34,9 +35,9 @@
         ivar = window.setInterval(function () {
             d = new Date();
             let t = (d.getTime() - start_real_time_millis) * (59.82 / 60) + (start_igt * 1000);
-            timer2_element.innerText = (t / 1000);
+            timer2_element.innerText = (t / 1000).toFixed(3);
             t = (d.getTime() - start_real_time_millis) + (start_igt * 1000);
-            timer3_element.innerText = (t / 1000);
+            timer3_element.innerText = (t / 1000).toFixed(3);
         }, 10);
     }
 
