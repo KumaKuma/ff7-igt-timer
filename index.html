@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+<h2 style="font-family: monospace" id="timer"></h2>
+<h2 style="font-family: monospace" id="timer-2"></h2>
+<h2 style="font-family: monospace" id="timer-3"></h2>
+
+<br>
+<button id="start-button" onclick="startButton()">Start</button>
+<button id="stop-button" onclick="stopButton()">Stop</button>
+<br>
+<label for="igt-on-start">IGT on start: </label><input id="igt-on-start" type="text">
+<button id="update-button" onclick="updateButton()">Update</button>
+<script>
+    let ivar;
+    let start_real_time_millis;
+    let start_igt = 0;
+
+    function startButton() {
+        let d = new Date();
+        start_real_time_millis = d.getTime();
+
+        let timer_element = $("#timer").get()[0];
+        let timer2_element = $("#timer-2").get()[0];
+        let timer3_element = $("#timer-3").get()[0];
+        if (ivar !== undefined && ivar !== null) {
+            window.clearInterval(ivar);
+        }
+        ivar = window.setInterval(function () {
+            d = new Date();
+            let t = (d.getTime() - start_real_time_millis) * (59.82 / 60) + (start_igt * 1000);
+            timer2_element.innerText = (t / 1000);
+            t = (d.getTime() - start_real_time_millis) + (start_igt * 1000);
+            timer3_element.innerText = (t / 1000);
+        }, 10);
+    }
+
+    function stopButton() {
+        if (ivar !== undefined && ivar !== null) {
+            window.clearInterval(ivar);
+        }
+    }
+
+    function updateButton() {
+        start_igt = 0;
+        let arr = $("#igt-on-start").val().split(":");
+        console.log(arr)
+        for (let x = 0; x < arr.length; x++) {
+            start_igt *= 60;
+            start_igt += parseInt(arr[x]);
+        }
+        start
+    }
+</script>
+</body>
+</html>
