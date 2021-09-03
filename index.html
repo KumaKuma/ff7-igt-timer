@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="jquery.js"></script>
 </head>
 <body>
 <p>IGT timer:</p>
@@ -27,8 +27,8 @@
         start_real_time_millis = d.getTime();
 
         // let timer_element = $("#timer").get()[0];
-        let timer2_element = $("#timer-2").get()[0];
-        let timer3_element = $("#timer-3").get()[0];
+        let timer2_element = document.getElementById("timer-2");
+        let timer3_element = document.getElementById("timer-3");
         if (ivar !== undefined && ivar !== null) {
             window.clearInterval(ivar);
         }
@@ -49,7 +49,7 @@
 
     function updateButton() {
         start_igt = 0;
-        let arr = $("#igt-on-start").val().split(":");
+        let arr = document.getElementById("igt-on-start").value.split(":");
         console.log(arr)
         for (let x = 0; x < arr.length; x++) {
             start_igt *= 60;
