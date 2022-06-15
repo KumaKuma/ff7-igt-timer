@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
 <button id="start-button" onclick="startButton()">Start</button>
 <button id="stop-button" onclick="stopButton()">Stop</button>
 <br>
-<label for="igt-on-start">IGT on start: </label><input id="igt-on-start" type="text">
+<label for="igt-on-start">IGT on start: </label><input id="igt-on-start" type="text" oninput="updateButton()">
 <button id="update-button" onclick="updateButton()">Update</button>
 <script>
     let ivar;
@@ -34,10 +33,12 @@
         }
         ivar = window.setInterval(function () {
             d = new Date();
-            let t = (d.getTime() - start_real_time_millis) * (59.82 / 60) + (start_igt * 1000);
-            timer2_element.innerText = (t / 1000).toFixed(3);
-            t = (d.getTime() - start_real_time_millis) + (start_igt * 1000);
-            timer3_element.innerText = (t / 1000).toFixed(3);
+            let t = ((d.getTime() - start_real_time_millis) * (59.82 / 60) + (start_igt * 1000)) / 1000;
+            let s = `${Math.floor(t / 3600)}:${("00" + Math.floor((t / 60) % 60)).slice(-2)}:${("00" + Math.floor(t % 60)).slice(-2)}`;
+            timer2_element.innerText = t.toFixed(3) + " " + s;
+            t = ((d.getTime() - start_real_time_millis) + (start_igt * 1000)) / 1000;
+            s = `${Math.floor(t / 3600)}:${("00" + Math.floor((t / 60) % 60)).slice(-2)}:${("00" + Math.floor(t % 60)).slice(-2)}`;
+            timer3_element.innerText = t.toFixed(3) + " " + s;
         }, 10);
     }
 
@@ -49,11 +50,17 @@
 
     function updateButton() {
         start_igt = 0;
-        let arr = document.getElementById("igt-on-start").value.split(":");
+        let val = document.getElementById("igt-on-start").value;
+        if (val.length === 0) {
+            return;
+        }
+        let arr = val.split(/[:\. ]/);
         console.log(arr)
         for (let x = 0; x < arr.length; x++) {
             start_igt *= 60;
-            start_igt += parseInt(arr[x]);
+            if (arr[x].length !== 0) {
+                start_igt += parseInt(arr[x]);
+            }
         }
     }
 </script>
