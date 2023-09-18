@@ -16,24 +16,32 @@
 <br>
 <label for="igt-on-start">IGT on start: </label><input id="igt-on-start" type="text" oninput="updateButton()">
 <button id="update-button" onclick="updateButton()">Update</button>
+<br>
+<label for="fps-input">FPS: </label><input type="text" name="fps-input" id="fps-input" value="59.824">
 <script>
     let ivar;
     let start_real_time_millis;
     let start_igt = 0;
+
+    const fpsInput = document.querySelector("#fps-input");
+
+    function fps() {
+        return parseFloat(fpsInput.value);
+    }
 
     function startButton() {
         let d = new Date();
         start_real_time_millis = d.getTime();
 
         // let timer_element = $("#timer").get()[0];
-        let timer2_element = document.getElementById("timer-2");
-        let timer3_element = document.getElementById("timer-3");
+        const timer2_element = document.getElementById("timer-2");
+        const timer3_element = document.getElementById("timer-3");
         if (ivar !== undefined && ivar !== null) {
             window.clearInterval(ivar);
         }
         ivar = window.setInterval(function () {
             d = new Date();
-            let t = ((d.getTime() - start_real_time_millis) * (59.82 / 60) + (start_igt * 1000)) / 1000;
+            let t = ((d.getTime() - start_real_time_millis) * (fps() / 60) + (start_igt * 1000)) / 1000;
             let s = `${Math.floor(t / 3600)}:${("00" + Math.floor((t / 60) % 60)).slice(-2)}:${("00" + Math.floor(t % 60)).slice(-2)}`;
             timer2_element.innerText = t.toFixed(3) + " " + s;
             t = ((d.getTime() - start_real_time_millis) + (start_igt * 1000)) / 1000;
