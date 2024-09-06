@@ -9,11 +9,7 @@
 <h1 style="font-family: monospace" id="timer-2"></h1>
 
 <br>
-<button id="start-button" onkeydown="startButton()" onclick="startButton()">StartF</button>
-$(document.body).on('keydown', function (keyVent) {
-    if (keyVent.which === 78) {"startButton()"
-    }
-});
+<button id="start-button" onkeydown="startButton()" onclick="startButton()">StartD</button>
 <button id="stop-button" onclick="stopButton()">Stop</button>
 <br>
 <label for="igt-on-start">IGT on start: </label><input id="igt-on-start" type="text" oninput="updateButton()">
@@ -73,6 +69,14 @@ $(document.body).on('keydown', function (keyVent) {
             }
         }
     }
+</script>
+<script>
+function myFunction(event) {
+  let key = event.key;
+  if (key == "Space") { 
+    "startbutton()"
+  }
+}
 </script>
 </body>
 </html>
