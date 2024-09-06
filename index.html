@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Timer</title>
 </head>
 <body>
 <p>IGT timer:</p>
 <h1 style="font-family: monospace" id="timer-2"></h1>
-<p>RTA timer (as if it started from the given IGT):</p>
-<h1 style="font-family: monospace" id="timer-3"></h1>
 
 <br>
-<button id="start-button" accesskey="S" onclick="startButton()">StartS</button>
+<button id="start-button" onKeyPress="startButton()" onclick="startButton()">Start</button>
 <button id="stop-button" onclick="stopButton()">Stop</button>
 <br>
 <label for="igt-on-start">IGT on start: </label><input id="igt-on-start" type="text" oninput="updateButton()">
 <button id="update-button" onclick="updateButton()">Update</button>
 <br>
-<label for="fps-input">FPS: </label><input type="text" name="fps-input" id="fps-input" value="59.82">
+<label for="fps-input">FPS: </label><input type="text" name="fps-input" id="fps-input" value="59.81">
 <script>
     let ivar;
     let start_real_time_millis;
